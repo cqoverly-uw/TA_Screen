@@ -3,10 +3,17 @@ GO
 
 USE UWSDBDataStore;
 
-select s1.student_name_lowc, s1.student_no, s1.system_key, t.test_dt, t.test_type, t.test_score from sec.APPLHISTTestScores t
+SELECT 
+	--s1.student_name_lowc, 
+	--s1.student_no, 
+	t.system_key, 
+	t.test_type,
+	MAX(t.test_score) AS 'High Score'
+	
+FROM sec.APPLHISTTestScores t
 join sec.student_1 s1
-on s1.system_key = t.system_key
-where s1.student_no IN
+ON s1.system_key = t.system_key
+WHERE s1.student_no IN
 	(
 		1673140,
 		1550989,
@@ -93,5 +100,6 @@ RTRIM(t.test_type) IN
 		'SPEAK'
 	)
 
-
+GROUP BY t.system_key, t.test_type
+ORDER BY t.system_key
 ;
