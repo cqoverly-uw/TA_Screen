@@ -1,0 +1,1 @@
+select * from sec.sys_tbl_42_test_range;
